@@ -26,12 +26,11 @@ public class Kontroll {
 		try {
 			forbindelse = DriverManager.getConnection(databasenavn, "Kurs", "Surk");
 		} catch (Exception e) {
-			throw new Exception("Kan ikke oppnå kontakt med databasen" + e);
+			throw new Exception("Kan ikke oppnÃ¥ kontakt med databasen" + e);
 		}
 	}
 	
 	// Finner student for logg inn funksjon ved hjelp av studentens navn og passord
-	// Laget 125
 	public ResultSet finnStudent(String studNavn, String studPassord) throws Exception {
 		resultat = null;
 		try {
@@ -45,8 +44,7 @@ public class Kontroll {
 		return resultat;
 	}
 
-	// Finner hva studenten svarte på spørsmål og alternativ for kvitteringen ved hjelp av studentID og evalueringsID 
-	// Laget 125
+	// Finner hva studenten svarte pÃ¥ spÃ¸rsmÃ¥l og alternativ for kvitteringen ved hjelp av studentID og evalueringsID 
 	public ResultSet finnSvar(int studID, int evalID) throws Exception {
 		resultat = null;
 		try {
@@ -61,9 +59,8 @@ public class Kontroll {
 		return resultat;
 	}
 	
-	// Finner hvilke evalueringer studenten har mulighet for å besvare basert på deres ID
-	// Laget av 125
-	public ResultSet finnUndersøkelse(int ID) throws Exception {
+	// Finner hvilke evalueringer studenten har mulighet for Ã¥ besvare basert pÃ¥ deres ID
+	public ResultSet finnUndersÃ¸kelse(int ID) throws Exception {
 		resultat = null;
 		try {
 			String sqlSetning = "select distinct skStudID, evalID, evalNavn, kursnavn, evalDatoInn, evalDatoUt\r\n"
@@ -82,9 +79,8 @@ public class Kontroll {
 		return resultat;
 	}
 
-	// Finner spørsmål basert på evalueringsID
-	// Laget av 125
-	public ResultSet finnSpørmål(int evalID) throws Exception {
+	// Finner spÃ¸rsmÃ¥l basert pÃ¥ evalueringsID
+	public ResultSet finnSpÃ¸rmÃ¥l(int evalID) throws Exception {
 		resultat = null;
 		try {
 			String sqlSetning = "SELECT spmTekst, spmID FROM tblsporsmal where  spmEvalID = " + evalID + ";";
@@ -96,8 +92,7 @@ public class Kontroll {
 		return resultat;
 	}
 
-	// Finner alternativer basert på spørsmålID
-	// Laget av 125
+	// Finner alternativer basert pÃ¥ spÃ¸rsmÃ¥lID
 	public ResultSet finnAlternativ(int spmID) throws Exception {
 		resultat = null;
 		try {
@@ -111,7 +106,6 @@ public class Kontroll {
 	}
 
 	// Lagrer hvilket svar alternativ som ble valgt
-	// Laget av 125
 	public void lagreSvar(int studID, int altID) throws Exception {
 		if (altID != 0) {
 			String sqlsetning = "INSERT INTO tblsvar VALUES(" + studID + "," + altID + ");";
@@ -119,14 +113,13 @@ public class Kontroll {
 				Statement utsagn = forbindelse.createStatement();
 				utsagn.executeUpdate(sqlsetning);
 			} catch (Exception ex) {
-				throw new Exception("Klarte ikke å lagre");
+				throw new Exception("Klarte ikke Ã¥ lagre");
 			}
 		}
 	}
 	
-	// Laget av kandidatnr 150
-	// Metoden for å lagre data om evaluering til database. Bruker Statement.RETURN_GENERATED_KEYS for å 
-	// hente ut den nyeste AUTO_INCREMENTED nøkkelen fra databasen.
+	// Metoden for Ã¥ lagre data om evaluering til database. Bruker Statement.RETURN_GENERATED_KEYS for Ã¥ 
+	// hente ut den nyeste AUTO_INCREMENTED nÃ¸kkelen fra databasen.
 	public void lagreEval(String kursID, String evaluering, String datoUt, String datoInn) throws Exception {
 		Statement utsagn = null;
 		ResultSet rs = null;
@@ -142,25 +135,24 @@ public class Kontroll {
 				nokkel = rs.getInt(1);
 			}
 			
-			// lukker resultat dersom den er åpen
+			// lukker resultat dersom den er Ã¥pen
 			if (rs != null) {
 				try {
 					rs.close();
-				} catch(Exception e) {System.out.println("Feil, får ikke lukket resultat" + e);}
+				} catch(Exception e) {System.out.println("Feil, fÃ¥r ikke lukket resultat" + e);}
 			}
 			
-			// Lukker utsagn dersom den er åpen
+			// Lukker utsagn dersom den er Ã¥pen
 			if (utsagn != null) {
 				try {
 					utsagn.close();
-				} catch(Exception e) {System.out.println("Feil, får ikke lukket utsagn" + e);}
+				} catch(Exception e) {System.out.println("Feil, fÃ¥r ikke lukket utsagn" + e);}
 			}
 		} catch(Exception e) {}
 	}
 	
-	// Laget av kandidatnr 150
-	// Metoden for å lagre data om spørsmål til database. Bruker Statement.RETURN_GENERATED_KEYS for å 
-	// hente ut den nyeste AUTO_INCREMENTED nøkkelen fra databasen.
+	// Metoden for Ã¥ lagre data om spÃ¸rsmÃ¥l til database. Bruker Statement.RETURN_GENERATED_KEYS for Ã¥ 
+	// hente ut den nyeste AUTO_INCREMENTED nÃ¸kkelen fra databasen.
 	public void lagreSpm(String spm) throws Exception {
 		Statement utsagn = null;
 		ResultSet rs = null;
@@ -176,24 +168,23 @@ public class Kontroll {
 				nokkelSpm = rs.getInt(1);
 			}
 			
-			// Lykker resultat dersom den er åpen
+			// Lykker resultat dersom den er Ã¥pen
 			if (rs != null) {
 				try {
 					rs.close();
-				} catch(Exception e) {System.out.println("Feil, får ikke lukket resultat" + e);}
+				} catch(Exception e) {System.out.println("Feil, fÃ¥r ikke lukket resultat" + e);}
 			}
 			
-			// Lukker utsagn dersom den er åpen
+			// Lukker utsagn dersom den er Ã¥pen
 			if (utsagn != null) {
 				try {
 					utsagn.close();
-				} catch(Exception e) {System.out.println("Feil, får ikke lukket utsagn" + e);}
+				} catch(Exception e) {System.out.println("Feil, fÃ¥r ikke lukket utsagn" + e);}
 			}
 		} catch(Exception e) {System.out.print(e);}
 	}
 	
-	// Laget av kandidatnr 150
-	// Metoden for å lagre data om alternativ til database. Sjekker om alternativene inneholder data før den
+	// Metoden for Ã¥ lagre data om alternativ til database. Sjekker om alternativene inneholder data fÃ¸r den
 	// blir sendt over til databasen.
 	public boolean lagreAlt(String alt1, String alt2, String alt3, String alt4, String alt5) throws Exception {
 		boolean resultat = false;
@@ -236,39 +227,37 @@ public class Kontroll {
 			}
 			// Lukker utsagn
 			utsagn.close();
-		} catch (Exception e) {System.out.println("Feil oppstått" + e);}
+		} catch (Exception e) {System.out.println("Feil oppstÃ¥tt" + e);}
 		return resultat;
 	}
 	
-	// Laget av kandidatnr 150 og 129
-	// Metode for å slette svar fra evaluering
+	// Metode for Ã¥ slette svar fra evaluering
 	public ResultSet slettSvar() throws Exception {
 		ResultSet resultat = null;
-		String søkOrd = Rapport.søkElement2();
+		String sÃ¸kOrd = Rapport.sÃ¸kElement2();
 		try {
 			lagForbindelse();
 			utsagn = forbindelse.createStatement();
-			utsagn.executeUpdate("DELETE FROM tblsvar WHERE svarAltID = "+ søkOrd +";");
+			utsagn.executeUpdate("DELETE FROM tblsvar WHERE svarAltID = "+ sÃ¸kOrd +";");
 			//Lukker utsagn
 			utsagn.close();
-		} catch(Exception e) {System.out.println("Feil oppstått" + e);}
+		} catch(Exception e) {System.out.println("Feil oppstÃ¥tt" + e);}
 		return resultat;
 	}
 	
 	//Kodet av kandidat: 129
-    //Lager en metode for nySvar, som er nødvendig for lagre ny svar til fil.
+    //Lager en metode for nySvar, som er nÃ¸dvendig for lagre ny svar til fil.
 	public void nySvar(String skStudID, String svarAltID) {
   		svar.add(new Svar(skStudID, svarAltID));
   	}
     
-  	//Kodet av kandidat: 129
-  	//For å finne riktig KursID
+  	//For Ã¥ finne riktig KursID
     public ResultSet finnSvar() throws Exception {
     	ResultSet resultat = null;
-    	String søkeOrd = Rapport.søkElement1();
+    	String sÃ¸keOrd = Rapport.sÃ¸kElement1();
     	try {
     		String sqlSetning = "select svarStudID, svarAltID from tblSvar, tblAlternativ, tblSporsmal, tblEvaluering, tblKurs\r\n" + 
-    							"where svarAltID = altID and altspmID = spmID and spmEvalID = evalID and evalKursID = kursID and kursID = '"+ søkeOrd +"';";
+    							"where svarAltID = altID and altspmID = spmID and spmEvalID = evalID and evalKursID = kursID and kursID = '"+ sÃ¸keOrd +"';";
             utsagn = forbindelse.createStatement();
             resultat = utsagn.executeQuery(sqlSetning);
             
@@ -279,8 +268,7 @@ public class Kontroll {
         } //metode
 
     
-  	//Kodet av kandidat: 129 og 125
-  	//Lagrer filer på flatfil basert på
+  	//Lagrer filer pÃ¥ flatfil basert pÃ¥
     public void lagreSvar() {
 		try {
 			ResultSet alleSvar = finnSvar();
@@ -299,7 +287,6 @@ public class Kontroll {
 		}catch(Exception e) {}
 	}
 	
-    //Kodet av kandidat: 129 og 125
     //Leser fra flatfil inn i arraylisten svar
 	public void lesSvar() {
 		svar.clear();
