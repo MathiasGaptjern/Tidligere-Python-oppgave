@@ -245,7 +245,6 @@ public class Kontroll {
 		return resultat;
 	}
 	
-	//Kodet av kandidat: 129
     //Lager en metode for nySvar, som er nødvendig for lagre ny svar til fil.
 	public void nySvar(String skStudID, String svarAltID) {
   		svar.add(new Svar(skStudID, svarAltID));
